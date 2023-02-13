@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import './signup_login_button.dart';
 import '../routes/route_names.dart';
 
-class GetStartedButtomSheet extends ConsumerWidget {
-  const GetStartedButtomSheet({
+class GetStartedBottomSheet extends ConsumerWidget {
+  const GetStartedBottomSheet({
     Key? key,
   }) : super(key: key);
 
@@ -44,14 +44,20 @@ class GetStartedButtomSheet extends ConsumerWidget {
           Divider(thickness: 1, color: theme.primaryColor.withOpacity(.3)),
           const SizedBox(height: 20),
           SignupLoginButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              context.pushNamed(RouteName.profile);
+            },
             icon: Icons.whatsapp_rounded,
             color: Colors.green,
             text: 'Signup/Login WhatsApp (faster)',
           ),
           const SizedBox(height: 30),
           SignupLoginButton(
-            onTap: () =>context.pushNamed(RouteName.signup),
+            onTap: () {
+              Navigator.of(context).pop();
+              context.pushNamed(RouteName.signup);
+            },
             icon: Icons.call_outlined,
             color: theme.primaryColor,
             text: 'Signup/Login With Mobile',

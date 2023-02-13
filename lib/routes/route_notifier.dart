@@ -47,6 +47,11 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
       path: RouteName.signup.toPath(),
       builder: (context, state) => const SignupScreen(),
     ),
+    GoRoute(
+      name: RouteName.profile,
+      path: RouteName.profile.toPath(),
+      builder: (context, state) => const ProfileScreen(),
+    ),
   ];
 }
 

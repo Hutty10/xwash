@@ -108,7 +108,7 @@ class GetStartedScreen extends ConsumerWidget {
                           topRight: Radius.circular(30),
                         ),
                       ),
-                      builder: (context) => const GetStartedButtomSheet(),
+                      builder: (context) => const GetStartedBottomSheet(),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: theme.primaryColor,
