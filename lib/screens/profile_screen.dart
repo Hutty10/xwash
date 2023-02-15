@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../widgets/category_bottomsheet.dart';
 import '../widgets/support_dialog.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -21,7 +22,10 @@ class ProfileScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              builder: (context) => const CategoryBottomSheet(),
+            ),
             icon: Icon(
               Icons.monetization_on_outlined,
               size: 32,
@@ -64,7 +68,12 @@ class ProfileScreen extends ConsumerWidget {
           ),
           Card(
             child: ListTile(
-              leading: const Icon(Icons.home),
+              leading: Image.asset(
+                'assets/images/orders.png',
+                width: 30,
+                height: 30,
+                fit: BoxFit.cover,
+              ),
               tileColor: Colors.white,
               iconColor: theme.primaryColor.withOpacity(.8),
               dense: true,
@@ -103,20 +112,22 @@ class ProfileScreen extends ConsumerWidget {
           const SizedBox(height: 5),
           ProfileCard(
             onTap: () {},
-            leadingIcon: Icons.add,
+            // leadingIcon: Icons.add,
+            leadingImg: 'assets/images/profile.png',
             text: 'Personal Details',
             isTop: true,
           ),
           ProfileCard(
             onTap: () {},
-            leadingIcon: Icons.add,
-            text: 'Peayment Cards',
+            leadingImg: 'assets/images/card.png',
+            text: 'Payment Cards',
           ),
           ProfileCard(
             onTap: () {},
-            leadingIcon: Icons.add,
+            leadingImg: 'assets/images/home.png',
             text: 'Addresses',
             isbottom: true,
+            color: const Color(0xff6F64E7),
           ),
           const SizedBox(height: 20),
           Text(
@@ -171,13 +182,14 @@ class ProfileScreen extends ConsumerWidget {
           ProfileCard(
             onTap: () {},
             text: 'Support',
-            leadingIcon: Icons.add,
+            leadingImg: 'assets/images/chat.png',
             isTop: true,
           ),
           ProfileCard(
             onTap: () {},
-            text: 'Support',
-            leadingIcon: Icons.add,
+            text: 'Terms of Service',
+            leadingIcon: Icons.error,
+            color: const Color(0xff6F64E7),
             isbottom: true,
           ),
           const SizedBox(height: 20),
@@ -215,16 +227,20 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard({
     Key? key,
     required this.text,
-    required this.leadingIcon,
+    this.leadingIcon,
+    this.leadingImg,
     required this.onTap,
     this.isTop = false,
     this.isbottom = false,
+    this.color,
   }) : super(key: key);
   final String text;
-  final IconData leadingIcon;
+  final IconData? leadingIcon;
+  final String? leadingImg;
   final GestureTapCallback onTap;
   final bool isTop;
   final bool isbottom;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +260,18 @@ class ProfileCard extends StatelessWidget {
         tileColor: Colors.white,
         iconColor: theme.primaryColor.withOpacity(.9),
         textColor: theme.primaryColor,
-        leading: Icon(leadingIcon),
+        leading: leadingImg == null
+            ? Icon(
+                leadingIcon,
+                size: 30,
+                color: color,
+              )
+            : Image.asset(
+                leadingImg!,
+                width: 30,
+                height: 30,
+                color: color,
+              ),
         minLeadingWidth: 2,
         minVerticalPadding: 0,
         shape: RoundedRectangleBorder(

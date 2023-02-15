@@ -46,7 +46,7 @@ class GetStartedBottomSheet extends ConsumerWidget {
           SignupLoginButton(
             onTap: () {
               Navigator.of(context).pop();
-              context.pushNamed(RouteName.profile);
+              context.pushNamed(RouteName.signup);
             },
             icon: Icons.whatsapp_rounded,
             color: Colors.green,

@@ -4,6 +4,7 @@ import 'package:extended_phone_number_input/phone_number_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xwash/routes/route_names.dart';
 
 import '../widgets/support_dialog.dart';
 
@@ -131,7 +132,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton.icon(
-                    onPressed: _numberValid ? () {} : null,
+                    onPressed: _numberValid
+                        ? () => context.goNamed(RouteName.home)
+                        : null,
                     icon: const Icon(Icons.whatsapp_rounded),
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(size.width - 40, 43),
@@ -148,7 +151,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: _numberValid ? () {} : null,
+                    onPressed: _numberValid
+                        ? () {
+                            FocusScope.of(context).unfocus();
+                            context.goNamed(RouteName.home);
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(size.width - 40, 43),
                       backgroundColor: theme.primaryColor,

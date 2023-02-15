@@ -57,7 +57,7 @@ class SignupLoginButton extends ConsumerWidget {
                 Icons.arrow_forward_rounded,
                 color: Colors.white.withOpacity(.8),
               ),
-            )
+            ),
           ],
         ),
       ),
