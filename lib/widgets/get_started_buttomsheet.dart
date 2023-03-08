@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import './signup_login_button.dart';
 import '../routes/route_names.dart';
+import '../services/auth_service.dart';
 
 class GetStartedBottomSheet extends ConsumerWidget {
   const GetStartedBottomSheet({
@@ -44,13 +45,10 @@ class GetStartedBottomSheet extends ConsumerWidget {
           Divider(thickness: 1, color: theme.primaryColor.withOpacity(.3)),
           const SizedBox(height: 20),
           SignupLoginButton(
-            onTap: () {
-              Navigator.of(context).pop();
-              context.pushNamed(RouteName.signup);
-            },
-            icon: Icons.whatsapp_rounded,
-            color: Colors.green,
-            text: 'Signup/Login WhatsApp (faster)',
+            onTap: () => ref.read(authServiceProvider).googleLogin(),
+            img: 'assets/images/google_icon.png',
+            color: Colors.black87,
+            text: 'Signup/Login Google (faster)',
           ),
           const SizedBox(height: 30),
           SignupLoginButton(
@@ -59,6 +57,7 @@ class GetStartedBottomSheet extends ConsumerWidget {
               context.pushNamed(RouteName.signup);
             },
             icon: Icons.call_outlined,
+            iconColor: Colors.white.withOpacity(.8),
             color: theme.primaryColor,
             text: 'Signup/Login With Mobile',
           ),

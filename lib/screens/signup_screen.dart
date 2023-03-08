@@ -3,9 +3,10 @@ import 'package:extended_phone_number_input/phone_number_controller.dart';
 import 'package:extended_phone_number_input/phone_number_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xwash/routes/route_names.dart';
 
+import '../routes/route_names.dart';
 import '../widgets/support_dialog.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
@@ -135,7 +136,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     onPressed: _numberValid
                         ? () => context.goNamed(RouteName.home)
                         : null,
-                    icon: const Icon(Icons.whatsapp_rounded),
+                    icon: const FaIcon(FontAwesomeIcons.whatsapp),
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(size.width - 40, 43),
                       backgroundColor: Colors.green,

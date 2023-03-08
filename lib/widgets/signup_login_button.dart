@@ -5,13 +5,17 @@ class SignupLoginButton extends ConsumerWidget {
   const SignupLoginButton({
     Key? key,
     required this.onTap,
-    required this.icon,
+    this.icon,
+    this.img,
     required this.color,
+    this.iconColor,
     required this.text,
   }) : super(key: key);
-  final IconData icon;
+  final IconData? icon;
   final String text;
+  final String? img;
   final Color color;
+  final Color? iconColor;
   final GestureTapCallback onTap;
 
   @override
@@ -32,17 +36,24 @@ class SignupLoginButton extends ConsumerWidget {
             Expanded(
               child: Row(
                 children: [
-                  Icon(
-                    icon,
-                    size: 30,
-                    color: Colors.white.withOpacity(.8),
-                  ),
+                  icon != null
+                      ? Icon(
+                          icon,
+                          size: 30,
+                          color: iconColor,
+                        )
+                      : Image.asset(
+                          img!,
+                          height: 30,
+                          width: 30,
+                        ),
                   const SizedBox(width: 10),
                   Text(
                     text,
                     style: TextStyle(
-                        color: Colors.white.withOpacity(.8),
-                        fontWeight: FontWeight.w600),
+                      color: Colors.white.withOpacity(.8),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),

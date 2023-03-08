@@ -1,39 +1,44 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart'
-    show Listenable, VoidCallback, BuildContext;
+import 'package:flutter/material.dart' show ChangeNotifier, BuildContext;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import './route_imports.dart';
+import '../extensions/on_string.dart';
 import '../routes/route_names.dart';
+import '../services/auth_service.dart';
 
-class RouterNotifier extends AutoDisposeAsyncNotifier<void>
-    implements Listenable {
-  VoidCallback? routerListener;
-  bool isAuth = false;
-
-  @override
-  FutureOr<void> build() async {
-    //TODO add logic to watch isAuth
-    ref.listenSelf((previous, next) {
-      if (state.isLoading) return;
-      routerListener?.call();
+class RouterNotifier extends ChangeNotifier {
+  final Ref _ref;
+  ProviderSubscription? subscription;
+  // final _prefs = SharedPreferences.getInstance();
+  RouterNotifier(this._ref) {
+    subscription = _ref.listen(
+      authStateProvider,
+      (_, __) => notifyListeners(),
+    );
+    _ref.onDispose(() {
+      subscription?.close();
     });
   }
-
   @override
-  void removeListener(VoidCallback listener) {
-    routerListener = listener;
-  }
-
-  @override
-  void addListener(VoidCallback listener) {
-    routerListener = null;
+  void dispose() {
+    subscription?.close();
+    super.dispose();
   }
 
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
-    return null;
+    final authState = _ref.read(authStateProvider);
+
+    // if (authState.isLoading || authState.hasError) return null;
+    final isAuth = authState.valueOrNull != null;
+    final isSignup = state.location == RouteName.signup.toPath();
+    final isGetStarted = state.location == RouteName.getStarted.toPath();
+    if (isSignup || isGetStarted) {
+      return isAuth ? RouteName.home.toPath() : null;
+    }
+    return isAuth ? null : RouteName.getStarted.toPath();
   }
 
   List<GoRoute> routes = <GoRoute>[
@@ -58,13 +63,4 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
       builder: (context, state) => const ProfileScreen(),
     ),
   ];
-}
-
-final routerNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<RouterNotifier, void>(() {
-  return RouterNotifier();
-});
-
-extension RouteNameToPath on String {
-  String toPath() => '/$this';
 }

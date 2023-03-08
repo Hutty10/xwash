@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "689693805665",
+    "project_id": "x-wash-d8e11",
+    "storage_bucket": "x-wash-d8e11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689693805665:android:3225dc05ec7d39e196ae20",
+        "android_client_info": {
+          "package_name": "com.example.xwash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689693805665-vakdrhqtq4dou4rhkdnge3cdsicdqss3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnw0IEP6BMExXnc7LsRp2lw97jU6ELy0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689693805665-vakdrhqtq4dou4rhkdnge3cdsicdqss3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

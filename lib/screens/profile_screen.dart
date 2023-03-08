@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xwash/routes/route_names.dart';
 
 import '../widgets/category_bottomsheet.dart';
 import '../widgets/support_dialog.dart';
@@ -194,7 +195,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 20),
           TextButton(
-            onPressed: () {},
+            onPressed: () => context.goNamed(RouteName.getStarted),
             style: TextButton.styleFrom(
               textStyle: const TextStyle(
                 // color: theme.primaryColor,

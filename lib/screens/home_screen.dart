@@ -216,34 +216,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             width: size.width,
             color: const Color(0xffD2CDF1),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            child: Container(
-              width: size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(10),
+            child: InkWell(
+              onTap: () => showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                builder: (_) => const PlaceNewOrderBottomSheet(),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Place New Order',
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(.9),
+              child: Container(
+                width: size.width,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: theme.primaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Place New Order',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(.9),
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.2),
-                      borderRadius: BorderRadius.circular(5),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(.2),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.white.withOpacity(.8),
+                      ),
                     ),
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: Colors.white.withOpacity(.8),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )
@@ -257,6 +269,109 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       height: 3,
       width: 15,
       color: isActive ? theme.primaryColor : theme.primaryColor.withOpacity(.4),
+    );
+  }
+}
+
+class PlaceNewOrderBottomSheet extends StatelessWidget {
+  const PlaceNewOrderBottomSheet({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 3, 20, 0),
+      child: Column(
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(width: 40),
+              Expanded(
+                flex: 10,
+                child: Text(
+                  'Select Service',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: theme.primaryColor,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(Icons.close, color: theme.primaryColor),
+              )
+            ],
+          ),
+          const Divider(),
+          const SizedBox(height: 15),
+          ServiceWidget(
+            onTap: () {},
+            img: 'assets/images/cloths.jpg',
+            label: 'Laundry & Dry Cleaning',
+          ),
+          const SizedBox(height: 20),
+          ServiceWidget(
+            onTap: () {},
+            img: 'assets/images/cleaning.jpg',
+            label: 'Domestic & Comercial cleaning',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ServiceWidget extends StatelessWidget {
+  const ServiceWidget({
+    super.key,
+    required this.img,
+    required this.label,
+    required this.onTap,
+  });
+  final GestureTapCallback onTap;
+  final String label;
+  final String img;
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    Size size = MediaQuery.of(context).size;
+    return Card(
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                img,
+                height: 120,
+                width: size.width,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              label,
+              style: TextStyle(
+                  color: theme.primaryColor,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
     );
   }
 }
