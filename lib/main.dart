@@ -24,7 +24,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: const Color(0xff1D136B),
+        primaryColor: const Color(0xff0F1DA1),
       ),
       routerConfig: router,
     );

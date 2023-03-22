@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xwash/routes/route_names.dart';
 
+import '../routes/route_names.dart';
+import '../services/auth_service.dart';
 import '../widgets/category_bottomsheet.dart';
 import '../widgets/support_dialog.dart';
 
@@ -69,6 +70,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           Card(
             child: ListTile(
+              onTap: () => context.pushNamed(RouteName.ordersList),
               leading: Image.asset(
                 'assets/images/orders.png',
                 width: 30,
@@ -112,30 +114,33 @@ class ProfileScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 5),
           ProfileCard(
-            onTap: () {},
+            onTap: () => context.pushNamed(RouteName.personalDetail),
             // leadingIcon: Icons.add,
             leadingImg: 'assets/images/profile.png',
             text: 'Personal Details',
             isTop: true,
           ),
           ProfileCard(
-            onTap: () {},
+            onTap: () => context.pushNamed(RouteName.paymentCards),
             leadingImg: 'assets/images/card.png',
             text: 'Payment Cards',
           ),
           ProfileCard(
-            onTap: () {},
+            onTap: () => context.pushNamed(RouteName.address),
             leadingImg: 'assets/images/home.png',
             text: 'Addresses',
             isbottom: true,
             color: const Color(0xff6F64E7),
           ),
           const SizedBox(height: 20),
-          Text(
-            'Referrals & Credits',
-            style: TextStyle(
-              color: theme.primaryColor,
-              fontSize: 14,
+          GestureDetector(
+            onTap: () => context.pushNamed(RouteName.referrals),
+            child: Text(
+              'Referrals & Credits',
+              style: TextStyle(
+                color: theme.primaryColor,
+                fontSize: 14,
+              ),
             ),
           ),
           Card(
@@ -181,7 +186,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 5),
           ProfileCard(
-            onTap: () {},
+            onTap: () => context.pushNamed(RouteName.support),
             text: 'Support',
             leadingImg: 'assets/images/chat.png',
             isTop: true,
@@ -195,7 +200,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 20),
           TextButton(
-            onPressed: () => context.goNamed(RouteName.getStarted),
+            onPressed: () => ref.read(authServiceProvider).logout(),
             style: TextButton.styleFrom(
               textStyle: const TextStyle(
                 // color: theme.primaryColor,
@@ -210,14 +215,17 @@ class ProfileScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text(
-            'Version 0.1.0 Build 1620376389',
-            style: TextStyle(
-              fontSize: 12,
-              color: theme.primaryColor.withOpacity(.45),
+          SizedBox(
+            height: 30,
+            child: Text(
+              'Version 0.1.0 Build 1620376389',
+              style: TextStyle(
+                fontSize: 12,
+                color: theme.primaryColor.withOpacity(.45),
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          )
+          ),
         ],
       ),
     );

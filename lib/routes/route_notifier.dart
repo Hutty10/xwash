@@ -31,7 +31,7 @@ class RouterNotifier extends ChangeNotifier {
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
     final authState = _ref.read(authStateProvider);
 
-    // if (authState.isLoading || authState.hasError) return null;
+    if (authState.isLoading || authState.hasError) return null;
     final isAuth = authState.valueOrNull != null;
     final isSignup = state.location == RouteName.signup.toPath();
     final isGetStarted = state.location == RouteName.getStarted.toPath();
@@ -39,6 +39,7 @@ class RouterNotifier extends ChangeNotifier {
       return isAuth ? RouteName.home.toPath() : null;
     }
     return isAuth ? null : RouteName.getStarted.toPath();
+    // return null;
   }
 
   List<GoRoute> routes = <GoRoute>[
@@ -61,6 +62,46 @@ class RouterNotifier extends ChangeNotifier {
       name: RouteName.profile,
       path: RouteName.profile.toPath(),
       builder: (context, state) => const ProfileScreen(),
+    ),
+    GoRoute(
+      name: RouteName.support,
+      path: RouteName.support.toPath(),
+      builder: (context, state) => const SupportScreen(),
+    ),
+    GoRoute(
+      name: RouteName.personalDetail,
+      path: RouteName.personalDetail.toPath(),
+      builder: (context, state) => const PersonalDetailsScreen(),
+    ),
+    GoRoute(
+      name: RouteName.paymentCards,
+      path: RouteName.paymentCards.toPath(),
+      builder: (context, state) => const PaymentCardsScreen(),
+    ),
+    GoRoute(
+      name: RouteName.address,
+      path: RouteName.address.toPath(),
+      builder: (context, state) => const AddressScreen(),
+    ),
+    GoRoute(
+      name: RouteName.referrals,
+      path: RouteName.referrals.toPath(),
+      builder: (context, state) => const ReferralsScreen(),
+    ),
+    GoRoute(
+      name: RouteName.ordersList,
+      path: RouteName.ordersList.toPath(),
+      builder: (context, state) => const OrdersListScreen(),
+    ),
+    GoRoute(
+      name: RouteName.addAddress,
+      path: RouteName.addAddress.toPath(),
+      builder: (context, state) => const NewAddress(),
+    ),
+    GoRoute(
+      name: RouteName.order,
+      path: RouteName.order.toPath(),
+      builder: (context, state) => const LaundryOrder(),
     ),
   ];
 }

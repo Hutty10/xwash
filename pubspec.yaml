@@ -43,6 +43,10 @@ dependencies:
   google_sign_in: ^6.0.2
   firebase_core: ^2.7.0
   firebase_auth: ^4.2.9
+  url_launcher: ^6.1.10
+  sqflite: ^2.2.5
+  path: ^1.8.2
+  connectivity_plus: ^3.0.3
 
 dev_dependencies:
   flutter_test:

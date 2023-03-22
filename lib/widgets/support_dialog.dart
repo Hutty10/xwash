@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../services/support_service.dart';
 import 'icon_label.dart';
 
 class SupportDialog extends ConsumerWidget {
@@ -72,17 +73,17 @@ class SupportDialog extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconWithLabel(
-                    onTap: () {},
+                    onTap: () => ref.read(supportServiceProvider).launchPhone(),
                     icon: Icons.call_outlined,
                     text: 'Call',
                   ),
                   IconWithLabel(
-                    onTap: () {},
+                    onTap: () => ref.read(supportServiceProvider).launchChat(),
                     icon: Icons.chat_outlined,
                     text: 'Chat',
                   ),
                   IconWithLabel(
-                    onTap: () {},
+                    onTap: () => ref.read(supportServiceProvider).launchEmail(),
                     icon: Icons.email_outlined,
                     text: 'Email',
                   ),

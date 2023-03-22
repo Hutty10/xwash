@@ -14,7 +14,7 @@ class AuthService {
   GoogleSignInAccount get gUser => _gUser!;
 
   Future googleLogin() async {
-    log('g loggin');
+    log('g-loggin');
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) return;
     _gUser = googleUser;
@@ -27,6 +27,7 @@ class AuthService {
     try {
       final auth = await _firebaseAuth.signInWithCredential(credential);
       log(auth.user!.uid);
+      log(auth.user!.displayName!);
     } on FirebaseAuthException catch (e) {
       _authErrorMsg = e.message!;
       log(_authErrorMsg);

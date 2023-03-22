@@ -311,13 +311,19 @@ class PlaceNewOrderBottomSheet extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 15),
           ServiceWidget(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              context.pushNamed(RouteName.order);
+            },
             img: 'assets/images/cloths.jpg',
             label: 'Laundry & Dry Cleaning',
           ),
           const SizedBox(height: 20),
           ServiceWidget(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              context.pushNamed(RouteName.order);
+            },
             img: 'assets/images/cleaning.jpg',
             label: 'Domestic & Comercial cleaning',
           ),
